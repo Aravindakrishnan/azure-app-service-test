@@ -13,7 +13,7 @@ spec:
         app: akrishnanh-docs
     spec:
       containers:
-      - name: mypythondockerrepo
+      - name: akrishnanhcontainer
         image: akrishnanhacrnew.azurecr.io/aravindakrishnan/azure-app-service-test:#{Build.BuildId}#
         ports:
         - containerPort: 5000
