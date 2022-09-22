@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: akrishnanh-docs-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: akrishnanh-docs
+  template:
+    metadata:
+      labels:
+        app: akrishnanh-docs
+    spec:
+      containers:
+      - name: mypythondockerrepo
+        image: akrishnanhacrnew.azurecr.io/aravindakrishnan/azure-app-service-test:#{Build.BuildId}#
+        ports:
+        - containerPort: 5000
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: akrishnanh-docs-svc
+spec:
+  selector:
+    app: akrishnanh-docs
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
